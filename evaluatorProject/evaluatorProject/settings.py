@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-1kja(k$2orr0o)h+ilq^s2*k6tntjf@z7%_c-m06jf4k&!7#!q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'evaluation_app',
+    'admin_app',
+    'teacher_app',
+    'student_app',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +58,7 @@ ROOT_URLCONF = 'evaluatorProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/"templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,8 +79,12 @@ WSGI_APPLICATION = 'evaluatorProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'upeedb',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -104,11 +112,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'Asia/Kolkata' #'UTC'
+# Translation is controlled by the USE_I18N setting. However, it involves internationalization and localization.
 USE_I18N = True
-
+# When it's enabled, two users accessing the same content may see dates, times and numbers formatted in different ways, depending on the formats for their current locale. The formatting system is disabled by default. To enable it, it's necessary to set USE_L10N = True in your settings file.
+USE_L10N = True
 USE_TZ = True
 
 
@@ -121,3 +129,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# from django.contrib.auth.models import User
+AUTH_USER_MODEL = "admin_app.User"
