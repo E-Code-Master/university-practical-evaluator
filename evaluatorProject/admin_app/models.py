@@ -108,12 +108,12 @@ class Course(models.Model):
 
 class Subject(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
-    code = models.IntegerField()
+    code = models.IntegerField(default=0, blank=True, null=True)
     course = models.OneToOneField(Course, blank=True, null=True, on_delete=models.CASCADE, related_name='íts_course')
 
-    created_at=models.DateField(auto_now_add=True)
+    created_at = models.DateField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='subject_created_by', blank=True, null=True)
-    updated_at= models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now_add=True)
     updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='subject_updated_by', blank=True, null=True)
 
     def __str__(self) -> str:
